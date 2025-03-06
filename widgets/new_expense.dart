@@ -7,8 +7,11 @@ import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:uuid/uuid.dart';
 
 final formatter = DateFormat.yMd();
+
+final id = Uuid().v4();
 
 class NewExpense extends ConsumerStatefulWidget {
   const NewExpense({super.key});
@@ -141,13 +144,14 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
                     return;
                   }
 
-                  ref.read(expenseProvider.notifier).add(
-                        _titleController.text,
-                        amount.toString(), // Pass as double, not string
-                        _selectedCategory,
-                        _selectedDate!,
-                      );
-                  // print(_selectedDate);
+                  final expenseData = Expense(
+                       
+                      title: _titleController.text,
+                      amount: amount,
+                      category: _selectedCategory,
+                      date: _selectedDate!);
+
+                  ref.read(expenseProvider.notifier).add(expenseData);
 
                   Navigator.pop(context);
                 },

@@ -19,6 +19,7 @@ class Expenses extends ConsumerStatefulWidget {
 }
 
 class _ExpensesState extends ConsumerState<Expenses> {
+  // final
   void _openExpenseOverLay() {
     showModalBottomSheet(
       useSafeArea: true,
@@ -63,6 +64,7 @@ class _ExpensesState extends ConsumerState<Expenses> {
     final width = MediaQuery.of(context).size.width;
 
     final data = ref.watch(expenseProvider);
+    print(data);
 
     Widget mainContent = const Center(
       child: Text('No data is available'),

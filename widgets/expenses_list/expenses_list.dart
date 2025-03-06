@@ -23,9 +23,9 @@ class ExpensesList extends ConsumerWidget {
               vertical: Theme.of(context).cardTheme.margin!.vertical),
         ),
         key: ValueKey(data[index]),
-        // onDismissed: (direction) {
-        //   onRemoveExpense(data[index]);
-        // },
+        onDismissed: (direction) {
+          ref.read(expenseProvider.notifier).remove(data[index]);
+        },
         child: ExpenseItem(
           index
         ),

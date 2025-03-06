@@ -10,58 +10,52 @@ var darkColorScheme = ColorScheme.fromSeed(
     seedColor: const Color.fromARGB(255, 7, 51, 37));
 
 void main() {
+  runApp(const ProviderScope(child: MyApp()));
+}
 
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-
-    runApp(
-    ProviderScope(
-      child: MaterialApp(
-        darkTheme: ThemeData.dark().copyWith(
-          colorScheme: darkColorScheme,
-          cardTheme: const CardTheme().copyWith(
-            color: darkColorScheme.secondaryContainer,
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: darkColorScheme.primaryContainer,
-              foregroundColor: darkColorScheme.onPrimaryContainer,
-            ),
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: darkColorScheme,
+        cardTheme: const CardTheme().copyWith(
+          color: darkColorScheme.secondaryContainer,
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: darkColorScheme.primaryContainer,
+            foregroundColor: darkColorScheme.onPrimaryContainer,
           ),
         ),
-      
-        theme: ThemeData().copyWith(
-          // scaffoldBackgroundColor:Color.fromARGB(255, 29, 103, 164) ,
-          colorScheme: kColorscheme,
-          appBarTheme: AppBarTheme().copyWith(
-            backgroundColor: kColorscheme.onPrimaryContainer,
-            foregroundColor: kColorscheme.primaryContainer,
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: kColorscheme.primaryContainer,
-            ),
-          ),
-      
-          cardTheme: const CardTheme().copyWith(
-            color: Color.fromARGB(255, 165, 142, 180),
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-          ),
-      
-          textTheme: ThemeData().textTheme.copyWith(
-                titleLarge: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: kColorscheme.onSecondaryContainer,
-                    fontSize: 16),
-              ),
-        ),
-        // card
-        themeMode: ThemeMode.system,
-      
-        home: Expenses(),
       ),
-    ),
-  );
-  // });
-  
+      theme: ThemeData().copyWith(
+        colorScheme: kColorscheme,
+        appBarTheme: AppBarTheme().copyWith(
+          backgroundColor: kColorscheme.onPrimaryContainer,
+          foregroundColor: kColorscheme.primaryContainer,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kColorscheme.primaryContainer,
+          ),
+        ),
+        cardTheme: const CardTheme().copyWith(
+          color: Color.fromARGB(255, 165, 142, 180),
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        ),
+        textTheme: ThemeData().textTheme.copyWith(
+              titleLarge: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: kColorscheme.onSecondaryContainer,
+                  fontSize: 16),
+            ),
+      ),
+      themeMode: ThemeMode.system,
+      home: const ProviderScope(child: Expenses()), // Wrap Expenses in ProviderScope
+    );
+  }
 }
